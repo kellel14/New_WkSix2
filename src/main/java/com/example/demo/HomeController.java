@@ -25,11 +25,27 @@ public class HomeController {
         Movie movie = new Movie();
         movie.setTitle("Star Movie");
         movie.setYear(2017);
-        movie.setDescription("About Ewoks on the Deathstar...");
+        movie.setDescription("About Stars...");
 
         //Add the movie into an empty list
         Set<Movie> movies = new HashSet<Movie>();
         movies.add(movie);
+
+        movie = new Movie();
+        movie.setTitle("DeathStar Ewoks");
+        movie.setYear(2011);
+        movie.setDescription("About Ewoks on DeathStar...");
+        movies.add(movie);
+
+        //Add the list of movies to the director's movie list
+        director.setMovies(movies);
+
+        //Save the director to the database
+        directorRepository.save(director);
+
+        //Grab all the directors from the database and send them to the template
+        model.addAttribute("directors", directorRepository.findAll());
+        return "index";
 
         //
     }
